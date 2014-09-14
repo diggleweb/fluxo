@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  info: MyString
+  amount_estimated: 1.5
+  amount: 1.5
+  date_estimated: 2014-09-13
+  date_transaction: 2014-09-13
+  commited: false
+
+two:
+  info: MyString
+  amount_estimated: 1.5
+  amount: 1.5
+  date_estimated: 2014-09-13
+  date_transaction: 2014-09-13
+  commited: false

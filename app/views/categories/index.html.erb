@@ -1,0 +1,41 @@
+<h1>
+	<span class="fi-book"></span>
+	Categorias
+	<a href="/categories/new" class="round button tiny">
+		<span class="fi-plus"></span>&nbsp;
+		criar
+	</a>
+</h1>
+
+<p>
+	Cada transação é aplicada a uma categoria, essas categorias são utilizadas
+	para que no futuro seja possível saber onde estão sendo feitos os maiores
+	gastos ou onde é possível fazer economias.
+</p>
+
+<table>
+	<thead>
+		<tr>
+			<th scope="column" width="40">#ID</th>
+			<th scope="column" width="200">Nome</th>
+			<th scope="column">Descrição</th>
+			<th scope="column" width="105">Ação</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @categories.each do |category| %>
+		<tr>
+			<td><%= category.id %></td>
+			<td>
+				<span style="border: 1px solid #AAAAAA; border-radius: 50%; display: inline-block; width: 10px; height: 10px; background: <%= category.color %>"></span>
+				<%= category.name %>
+			</td>
+			<td><%= category.description %></td>
+			<td>
+				<a href="/categories/<%= category.id %>/edit">editar</a>
+				<a href="/categories/<%= category.id %>/delete">apagar</a>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

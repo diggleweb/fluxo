@@ -1,0 +1,21 @@
+<%= form_for @category do |f| %>
+	<% if @category.errors.any? %>
+		<div id="errorExplanation">
+			<h2><%= pluralize(@category.errors.count, "erro") %> invalidaram a criação desta categoria:</h2>
+			<ul>
+				<% @category.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<%= f.text_field :name %>
+
+	<%= f.color_field :color %>
+
+	<%= f.text_area :description, size: '24x6' %>
+
+	<%= f.submit %>
+
+<% end %>
