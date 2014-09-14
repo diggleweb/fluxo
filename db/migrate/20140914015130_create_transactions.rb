@@ -2,6 +2,7 @@ class CreateTransactions < ActiveRecord::Migration
   def change
     create_table :transactions do |t|
       t.belongs_to :category
+      t.belongs_to :account
       
       t.string :info
       t.float :amount_estimated

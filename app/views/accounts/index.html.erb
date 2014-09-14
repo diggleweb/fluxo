@@ -1,0 +1,41 @@
+<h1>
+  <span class="fi-dollar-bill"></span>
+  Contas
+  <%= link_to new_account_path, class: 'round tiny button' do %>
+    <span class="fi-plus"></span>&nbsp;
+    criar
+  <% end %>
+</h1>
+
+<p>
+  As contas são representações de onde o seu dinheiro está entrando ou saindo ou sendo transferido.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="column" width="50">#ID</th>
+      <th scope="column" width="200">Nome</th>
+      <th scope="column">Descrição</th>
+      <th scope="column" width="170">Ação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= link_to account.id, account %></td>
+        <td><%= account.name %></td>
+        <td><%= account.description %></td>
+      <td>
+        <%= link_to 'editar', edit_account_path(account), class: 'button tiny' %>
+        <%= link_to 'apagar', account, method: :delete, class: 'button alert tiny', data: { confirm: 'Tem certeza?' } %>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

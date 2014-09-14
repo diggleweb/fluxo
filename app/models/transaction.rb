@@ -1,5 +1,6 @@
-class Transactions < ActiveRecord::Base
+class Transaction < ActiveRecord::Base
 	belongs_to :category
+	belongs_to :account
 
 	validates :info,
 			  :ammount_estimated,
