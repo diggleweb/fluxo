@@ -13,27 +13,31 @@
 	gastos ou onde é possível fazer economias.
 </p>
 
+<% flash.each do |name, msg| -%>
+	<%= content_tag :div, msg, class: "alert-box #{name}" %>
+<% end -%>
+
 <table>
 	<thead>
 		<tr>
 			<th scope="column" width="40">#ID</th>
 			<th scope="column" width="200">Nome</th>
 			<th scope="column">Descrição</th>
-			<th scope="column" width="105">Ação</th>
+			<th scope="column" width="170">Ação</th>
 		</tr>
 	</thead>
 	<tbody>
 		<% @categories.each do |category| %>
 		<tr>
-			<td><%= category.id %></td>
+			<td><%= link_to category.id, category %></td>
 			<td>
-				<span style="border: 1px solid #AAAAAA; border-radius: 50%; display: inline-block; width: 10px; height: 10px; background: <%= category.color %>"></span>
+				<%= category_bullet category %>
 				<%= category.name %>
 			</td>
 			<td><%= category.description %></td>
 			<td>
-				<a href="/categories/<%= category.id %>/edit">editar</a>
-				<a href="/categories/<%= category.id %>/delete">apagar</a>
+				<%= link_to 'editar', edit_category_path(category), class: 'button tiny' %>
+				<%= link_to 'apagar', category, method: :delete, class: 'button alert tiny', data: { confirm: 'Tem certeza?' } %>
 			</td>
 		</tr>
 		<% end %>

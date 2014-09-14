@@ -1,0 +1,32 @@
+<h1>
+	<span class="fi-book"></span>
+	Categoria
+	# <%= @category.id %>
+</h1>
+
+<div class="row">
+	<div class="small-3 columns">Nome</div>
+	<div class="small-9 columns">
+		<%= category_bullet @category %>
+		<%= @category.name %>
+	</div>
+</div>
+<div class="row">
+	<div class="small-3 columns">Descrição</div>
+	<div class="small-9 columns"><%= @category.description %></div>
+</div>
+
+<hr>
+
+<div class="row">
+	<div class="small-12 column">
+		<%= link_to categories_path, class: 'button secondary small left' do %>
+			<span class="fi-arrow-left"></span>
+			Voltar
+		<% end %>
+		<div class="right">
+			<%= link_to 'Apagar', @category, method: :delete, class: 'button alert small', data: { confirm: 'Tem certeza?' } %>
+			<%= link_to 'Editar', edit_category_path(@category), class: 'button small' %>
+		</div>
+	</div>
+</div>
