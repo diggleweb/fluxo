@@ -1,15 +1,16 @@
 class Transaction < ActiveRecord::Base
-	belongs_to :category
-	belongs_to :account
+    belongs_to :category
+    belongs_to :account
 
-	validates :info,
-			  :ammount_estimated,
-			  :category_id,
-			  :date_estimated,
-			  :commited,
-			  presence: true
+    validates :info,
+              :amount_estimated,
+              :category_id,
+              :date_estimated,
+              presence: true
 
-	validates :info, length: { maximun: 40 }
+    validates :commited,  inclusion: { in: [false, true] }, allow_nil: false
 
-	validates :date_transaction, :amount, presence: true, if: commited?
+    validates :info, length: { maximum: 40 }
+
+    validates :date_transaction, :amount, presence: true, if: "true == commited"
 end

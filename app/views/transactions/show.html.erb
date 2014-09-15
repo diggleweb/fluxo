@@ -1,0 +1,50 @@
+<h1>
+  <span class="fi-dollar-bill"></span>
+  Transação
+  # <%= @transaction.id %>
+</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @transaction.category.name %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @transaction.account.name %>
+</p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @transaction.info %>
+</p>
+
+<p>
+  <strong>Amount estimated:</strong>
+  R$ <%= '%.2f' % (@transaction.amount_estimated || 0) %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  R$ <%= '%.2f' % (@transaction.amount || 0) %>
+</p>
+
+<p>
+  <strong>Date estimated:</strong>
+  <%= @transaction.date_estimated %>
+</p>
+
+<p>
+  <strong>Commited:</strong>
+  <%= @transaction.commited %>
+</p>
+
+<p>
+  <strong>Date transaction:</strong>
+  <%= @transaction.date_transaction %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

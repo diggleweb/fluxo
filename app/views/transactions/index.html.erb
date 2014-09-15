@@ -1,0 +1,46 @@
+<h1>
+  <span class="fi-dollar-bill"></span>
+  Transações
+  <%= link_to new_transaction_path, class: 'round tiny button' do %>
+    <span class="fi-plus"></span>&nbsp;
+    criar
+  <% end %>
+</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="column" width="50">#ID</th>
+      <th scope="column">Infomação</th>
+      <th scope="column">Estimativa</th>
+      <th scope="column">Data Estimada</th>
+      <th scope="column">Valor</th>
+      <th scope="column">Data</th>
+      <th scope="column">Já aconteceu?</th>
+      <th scope="column" width="170">Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= link_to transaction.id, transaction %></td>
+        <td>
+          <%= category_bullet transaction.category %>
+          <span title="<%= transaction.account.name %>">
+            <%= transaction.info %>
+          </span>
+        </td>
+        <td>R$ <%= '%.2f' % (transaction.amount_estimated || 0) %></td>
+        <td><%= transaction.date_estimated %></td>
+        <td>R$ <%= '%.2f' % (transaction.amount || 0) %></td>
+        <td><%= transaction.date_transaction %></td>
+        <td><%= transaction.commited ? 'Sim' : 'Não' %></td>
+        <td>
+        <%= link_to 'editar', edit_transaction_path(transaction), class: 'button tiny' %>
+        <%= link_to 'apagar', transaction, method: :delete, class: 'button alert tiny', data: { confirm: 'Tem certeza?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

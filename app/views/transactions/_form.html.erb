@@ -1,0 +1,48 @@
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="small-12 columns">
+      <%= f.text_field :info, label: 'Informações' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-6 columns">
+      <%= f.select :category_id, options(@categories), label: 'Categoria' %>
+    </div>
+    <div class="small-6 columns">
+      <%= f.select :account_id, options(@accounts), label: 'Conta' %>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="small-6 columns">
+      <h6>Estimativa</h6>
+      <%= f.date_select :date_estimated, label: 'Data prevista', order: [:day, :month, :year] %>
+      <%= f.text_field :amount_estimated, label: 'Estimativa' %>
+    </div>
+    <div class="small-6 columns">
+      <%= f.check_box :commited, {label: 'Já aconteceu', checked: @transaction.commited} %>
+
+      <%= f.date_select :date_transaction, label: 'Data de execução', order: [:day, :month, :year] %>
+      <%= f.text_field :amount, label: 'Valor real' %>
+    </div>
+  </div>
+
+
+    <%= f.submit %>
+
+<% end %>
