@@ -13,4 +13,12 @@ class Transaction < ActiveRecord::Base
     validates :info, length: { maximum: 40 }
 
     validates :date_transaction, :amount, presence: true, if: "true == commited"
+
+    after_save :update_account
+
+    protected
+
+      def update_account
+        self.account.save
+      end
 end
