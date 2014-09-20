@@ -17,6 +17,7 @@
       <th scope="column" width="50">#ID</th>
       <th scope="column" width="200">Nome</th>
       <th scope="column">Descrição</th>
+      <th scope="column">Saldo</th>
       <th scope="column" width="170">Ação</th>
     </tr>
   </thead>
@@ -27,6 +28,7 @@
         <td><%= link_to account.id, account %></td>
         <td><%= account.name %></td>
         <td><%= account.description %></td>
+        <td>R$ <%= '%.2f' % (account.balance || 0) %></td>
       <td>
         <%= link_to 'editar', edit_account_path(account), class: 'button tiny' %>
         <%= link_to 'apagar', account, method: :delete, class: 'button alert tiny', data: { confirm: 'Tem certeza?' } %>
