@@ -8,5 +8,6 @@ class Account < ActiveRecord::Base
 
 		def update_balance
 			self.balance = Transaction.where(account: self.id).sum :amount
+			self.balance_estimated = Transaction.where(account: self.id).sum :amount_estimated
 		end
 end

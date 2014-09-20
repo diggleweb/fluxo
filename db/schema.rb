@@ -18,7 +18,8 @@ ActiveRecord::Schema.define(version: 20140920200646) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "balance",     precision: 8, scale: 2
+    t.decimal  "balance",           precision: 8, scale: 2
+    t.decimal  "balance_estimated", precision: 8, scale: 2
   end
 
   create_table "categories", force: true do |t|
