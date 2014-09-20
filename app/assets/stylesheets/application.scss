@@ -1,0 +1,30 @@
+@import "foundation_and_overrides";
+
+h1 {
+	border-bottom: 1px solid silver;
+}
+
+h1 .button {
+	top: -0.5rem;
+	margin-bottom: 5px;
+}
+
+table .button {
+	margin-bottom: 0;
+}
+
+.category-bullet {
+	border: 1px solid #AAAAAA;
+	border-radius: 50%;
+	display: inline-block;
+	width: 10px;
+	height: 10px; 
+}
+
+a.button {
+	color: #FFFFFF;
+}
+
+.negative {
+	color: $alert-color;
+}
