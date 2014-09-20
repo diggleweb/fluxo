@@ -31,9 +31,9 @@
             <%= transaction.info %>
           </span>
         </td>
-        <td>R$ <%= '%.2f' % (transaction.amount_estimated || 0) %></td>
+        <td class="<%= error_class transaction.amount_estimated %>">R$ <%= '%.2f' % (transaction.amount_estimated || 0) %></td>
         <td><%= transaction.date_estimated %></td>
-        <td>R$ <%= '%.2f' % (transaction.amount || 0) %></td>
+        <td class="<%= error_class transaction.amount %>">R$ <%= '%.2f' % (transaction.amount || 0) %></td>
         <td><%= transaction.date_transaction %></td>
         <td><%= transaction.commited ? 'Sim' : 'Não' %></td>
         <td>
