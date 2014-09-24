@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root to: "transactions#index"
+
   resources :accounts
   resources :categories
   resources :transactions
