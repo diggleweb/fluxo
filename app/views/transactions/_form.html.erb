@@ -31,18 +31,17 @@
   <div class="row">
     <div class="small-6 columns">
       <h6>Estimativa</h6>
-      <%= f.date_select :date_estimated, label: 'Data prevista', order: [:day, :month, :year] %>
+      <%= f.text_field :date_estimated, type: 'date', label: 'Data prevista', order: [:day, :month, :year] %>
       <%= f.text_field :amount_estimated, label: 'Estimativa' %>
     </div>
     <div class="small-6 columns">
-      <%= f.check_box :commited, {label: 'Já aconteceu', checked: @transaction.commited} %>
+      <%= f.check_box :commited, label: 'Já aconteceu', checked: @transaction.commited, class: 'checkbox_commited' %>
 
-      <%= f.date_select :date_transaction, label: 'Data de execução', order: [:day, :month, :year] %>
+      <%= f.text_field :date_transaction, type: 'date', label: 'Data de execução', order: [:day, :month, :year] %>
       <%= f.text_field :amount, label: 'Valor real' %>
     </div>
   </div>
 
-
-    <%= f.submit %>
+  <%= f.submit (@transaction.id ? 'Atualizar' : 'Criar') %>
 
 <% end %>
