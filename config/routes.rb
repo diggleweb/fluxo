@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users,
-    controllers: {
-      sessions: "users/sessions",
-      registrations: "users/registrations",
-      passwords: "users/passwords"
-    },
+    skip: :registrations,
     path: 'auth',
     path_names: {
       sign_in: 'login',
