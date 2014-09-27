@@ -7,11 +7,12 @@
   <% end %>
 </h1>
 
-<table>
+<table class="tablesaw tablesaw-stack" data-mode="stack">
   <thead>
     <tr>
       <th scope="column" width="50">#ID</th>
       <th scope="column">Infomação</th>
+      <th scope="column">Beneficiado</th>
       <th scope="column">Estimativa</th>
       <th scope="column">Data Estimada</th>
       <th scope="column">Valor</th>
@@ -31,6 +32,7 @@
             <%= transaction.info %>
           </span>
         </td>
+        <td><%= transaction.payee ? transaction.payee.name : '-' %></td>
         <td class="<%= error_class transaction.amount_estimated %>">R$ <%= '%.2f' % (transaction.amount_estimated || 0) %></td>
         <td><%= transaction.date_estimated %></td>
         <td class="<%= error_class transaction.amount %>">R$ <%= '%.2f' % (transaction.amount || 0) %></td>

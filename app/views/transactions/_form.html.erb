@@ -18,11 +18,14 @@
   </div>
 
   <div class="row">
-    <div class="small-6 columns">
+    <div class="small-4 columns">
       <%= f.select :category_id, options(@categories), label: 'Categoria' %>
     </div>
-    <div class="small-6 columns">
+    <div class="small-4 columns">
       <%= f.select :account_id, options(@accounts), label: 'Conta' %>
+    </div>
+    <div class="small-4 columns">
+      <%= f.select :payee_id, options(@payees), label: 'Beneficiado', include_blank: true %>
     </div>
   </div>
 

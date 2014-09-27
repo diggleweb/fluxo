@@ -1,4 +1,5 @@
 @import "foundation_and_overrides";
+@import "tablesaw";
 
 h1 {
 	border-bottom: 1px solid silver;
@@ -7,6 +8,14 @@ h1 {
 h1 .button {
 	top: -0.5rem;
 	margin-bottom: 5px;
+}
+
+table {
+	font-size: .8em;
+}
+
+table th {
+	background: #F5F5F5;
 }
 
 table .button {

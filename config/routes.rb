@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :payees
+
   devise_for :users,
     skip: :registrations,
     path: 'auth',

@@ -4,47 +4,76 @@
   # <%= @transaction.id %>
 </h1>
 
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="small-3 columns">Categoria</div>
+  <div class="small-9 columns">
+    <%= @transaction.category.name %>
+  </div>
+</div>
 
-<p>
-  <strong>Category:</strong>
-  <%= @transaction.category.name %>
-</p>
+<div class="row">
+  <div class="small-3 columns">Conta</div>
+  <div class="small-9 columns">
+    <%= @transaction.account.name %>
+  </div>
+</div>
 
-<p>
-  <strong>Account:</strong>
-  <%= @transaction.account.name %>
-</p>
+<div class="row">
+  <div class="small-3 columns">Descrição</div>
+  <div class="small-9 columns">
+    <%= @transaction.info %>
+  </div>
+</div>
 
-<p>
-  <strong>Info:</strong>
-  <%= @transaction.info %>
-</p>
+<div class="row">
+  <div class="small-3 columns">Data estimada</div>
+  <div class="small-9 columns">
+    <%= @transaction.date_estimated %>
+  </div>
+</div>
 
-<p>
-  <strong>Amount estimated:</strong>
-  R$ <%= '%.2f' % (@transaction.amount_estimated || 0) %>
-</p>
+<div class="row">
+  <div class="small-3 columns">Valor estimado</div>
+  <div class="small-9 columns">
+    R$ <%= '%.2f' % (@transaction.amount_estimated || 0) %>
+  </div>
+</div>
 
-<p>
-  <strong>Amount:</strong>
-  R$ <%= '%.2f' % (@transaction.amount || 0) %>
-</p>
+<hr />
 
-<p>
-  <strong>Date estimated:</strong>
-  <%= @transaction.date_estimated %>
-</p>
+<div class="row">
+  <div class="small-3 columns">Já aconteceu?</div>
+  <div class="small-9 columns">
+    <%= '<span class="fi-check"></span>'.html_safe if @transaction.commited %>
+    <%= '<span class="fi-x"></span>'.html_safe unless @transaction.commited %>
+  </div>
+</div>
 
-<p>
-  <strong>Commited:</strong>
-  <%= @transaction.commited %>
-</p>
+<div class="row">
+  <div class="small-3 columns">Data real</div>
+  <div class="small-9 columns">
+    <%= @transaction.date_estimated %>
+  </div>
+</div>
 
-<p>
-  <strong>Date transaction:</strong>
-  <%= @transaction.date_transaction %>
-</p>
+<div class="row">
+  <div class="small-3 columns">Valor real</div>
+  <div class="small-9 columns">
+    R$ <%= '%.2f' % (@transaction.amount || 0) %>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
-<%= link_to 'Back', transactions_path %>
+<hr>
+
+<div class="row">
+  <div class="small-12 column">
+    <%= link_to transactions_path, class: 'button secondary small left' do %>
+      <span class="fi-arrow-left"></span>
+      Voltar
+    <% end %>
+    <div class="right">
+      <%= link_to 'Apagar', @transaction, method: :delete, class: 'button alert small', data: { confirm: 'Tem certeza?' } %>
+      <%= link_to 'Editar', edit_transaction_path(@transaction), class: 'button small' %>
+    </div>
+  </div>
+</div>

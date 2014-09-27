@@ -13,36 +13,35 @@
 
   <body>
 
-    <div class="fixed">
-        <nav class="top-bar" data-topbar role="navigation">
-          <ul class="title-area">
-            <li class="name">
-              <h1><a href="/">Fluxo de Caixa</a></h1>
-            </li>
-            <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-          </ul>
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="/">Fluxo de Caixa</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+      </ul>
 
-          <section class="top-bar-section">
-            <ul class="left">
-              <li><a href="/transactions">Transações</a></li>
-              <li><%= link_to 'Categorias', categories_path %></li>
-              <li><%= link_to 'Contas', accounts_path %></li>
-            </ul>
-            <ul class="right">
-              <li class="show-for-medium-up">
-                <a href="#">
-                  <span class="fi-torso"></span>
-                  <%= current_user.email %>
-                </a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to 'Sair', destroy_user_session_path, :method => :delete %>
-              </li>
-            </ul>
-          </section>
-        </nav>
-    </div>
+      <section class="top-bar-section">
+        <ul class="left">
+          <li><a href="/transactions">Transações</a></li>
+          <li><%= link_to 'Categorias', categories_path %></li>
+          <li><%= link_to 'Beneficiados', payees_path %></li>
+          <li><%= link_to 'Contas', accounts_path %></li>
+        </ul>
+        <ul class="right">
+          <li class="show-for-medium-up">
+            <a href="#">
+              <span class="fi-torso"></span>
+              <%= current_user.email %>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to 'Sair', destroy_user_session_path, :method => :delete %>
+          </li>
+        </ul>
+      </section>
+    </nav>
 
     <div class="row">
       <div class="small-12 columns">

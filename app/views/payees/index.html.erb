@@ -1,0 +1,32 @@
+<h1>
+  <span class="fi-torso"></span>
+  Beneficiados
+  <%= link_to new_payee_path, class: 'round tiny button' do %>
+    <span class="fi-plus"></span>&nbsp;
+    criar
+  <% end %>
+</h1>
+
+
+<table class="tablesaw tablesaw-stack" data-mode="stack">
+  <thead>
+    <tr>
+      <th scope="column" width="50">#ID</th>
+      <th scope="column">Nome</th>
+      <th scope="column" width="170">Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @payees.each do |payee| %>
+      <tr>
+        <td><%= link_to payee.id, payee %></td>
+        <td><%= payee.name %></td>
+        <td>
+        <%= link_to 'editar', edit_payee_path(payee), class: 'button tiny' %>
+        <%= link_to 'apagar', payee, method: :delete, class: 'button alert tiny', data: { confirm: 'Tem certeza?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140924032553) do
+ActiveRecord::Schema.define(version: 20140927022039) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20140924032553) do
     t.datetime "updated_at"
   end
 
+  create_table "payees", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "transactions", force: true do |t|
     t.integer  "category_id"
     t.integer  "account_id"
@@ -41,7 +47,10 @@ ActiveRecord::Schema.define(version: 20140924032553) do
     t.boolean  "commited"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "payee_id"
   end
+
+  add_index "transactions", ["payee_id"], name: "index_transactions_on_payee_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

@@ -17,12 +17,14 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
     @categories = Category.all
     @accounts = Account.all
+    @payees = Payee.all
   end
 
   # GET /transactions/1/edit
   def edit
     @categories = Category.all
     @accounts = Account.all
+    @payees = Payee.all
   end
 
   # POST /transactions
@@ -77,6 +79,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:category_id, :account_id, :info, :amount_estimated, :amount, :date_estimated, :date_transaction, :commited)
+      params.require(:transaction).permit(:category_id, :account_id, :info, :amount_estimated, :amount, :date_estimated, :date_transaction, :commited, :payee_id)
     end
 end
