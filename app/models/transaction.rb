@@ -5,7 +5,6 @@ class Transaction < ActiveRecord::Base
 
     validates :info,
               :amount_estimated,
-              :category_id,
               :date_estimated,
               presence: true
 

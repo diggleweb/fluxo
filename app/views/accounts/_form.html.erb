@@ -15,7 +15,7 @@
 
   <% if @account.new_record? %>
     <%= label_tag 'Valor inicial' %>
-    <%= number_field :transaction, :ammount, step: 0.5 %>
+    <%= number_field :transaction, :ammount, name: :start_ammount, step: 0.5 %>
   <% end %>
 
   <%= f.text_area :description, label: 'Descrição' %>

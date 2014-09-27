@@ -14,6 +14,14 @@
 	<div class="small-3 columns">Descrição</div>
 	<div class="small-9 columns"><%= @account.description %></div>
 </div>
+<div class="row">
+	<div class="small-3 columns">Valor estimado</div>
+	<div class="small-9 columns">R$ <%= '%.2f' % @account.balance_estimated %></div>
+</div>
+<div class="row">
+	<div class="small-3 columns">Valor real</div>
+	<div class="small-9 columns">R$ <%= '%.2f' % @account.balance %></div>
+</div>
 
 <hr>
 

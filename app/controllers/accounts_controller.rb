@@ -25,6 +25,10 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
+    if params[:start_ammount]
+      start_ammount = params[:start_ammount].to_f
+      @account.start_ammount = start_ammount if start_ammount != 0
+    end
 
     respond_to do |format|
       if @account.save
