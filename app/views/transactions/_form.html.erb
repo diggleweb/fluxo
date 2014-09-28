@@ -45,6 +45,14 @@
     </div>
   </div>
 
+  <hr />
+
+  <div class="row">
+    <div class="small-12 columns">
+      <%= f.text_area :description, label: 'Descrição/Anotações', size: '100%x10' %>
+    </div>
+  </div>
+
   <%= f.submit (@transaction.id ? 'Atualizar' : 'Criar') %>
 
 <% end %>

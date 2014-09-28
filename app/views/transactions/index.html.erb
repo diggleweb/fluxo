@@ -28,7 +28,7 @@
         <td><%= link_to transaction.id, transaction %></td>
         <td>
           <%= category_bullet transaction.category %>
-          <span title="<%= transaction.account.name %>">
+          <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= tip transaction %>">
             <%= transaction.info %>
           </span>
         </td>

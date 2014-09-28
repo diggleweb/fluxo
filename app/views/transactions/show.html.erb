@@ -7,7 +7,7 @@
 <div class="row">
   <div class="small-3 columns">Categoria</div>
   <div class="small-9 columns">
-    <%= @transaction.category.name %>
+    <%= @transaction.category ? @transaction.category.name : '-' %>
   </div>
 </div>
 
@@ -60,6 +60,15 @@
   <div class="small-3 columns">Valor real</div>
   <div class="small-9 columns">
     R$ <%= '%.2f' % (@transaction.amount || 0) %>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="small-3 columns">Descrição/Anotações</div>
+  <div class="small-9 columns">
+    <%= @transaction.description ? @transaction.description : '<span class="text-mutted">Sem anotações</span>'.html_safe %>
   </div>
 </div>
 
