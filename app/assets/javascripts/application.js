@@ -16,4 +16,7 @@
 //= require turbolinks
 //= require tablesaw
 
-$(function(){ $(document).foundation(); });
+// $(function(){ $(document).foundation(); });
+$(function () {
+  $(document).foundation();
+});
