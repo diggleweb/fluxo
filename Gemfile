@@ -5,7 +5,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :development
-gem 'mysql2', group: :production
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -44,4 +43,12 @@ gem 'devise'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# production specifix
+group :production do
+  gem "fcgi"
+  gem "bundler"
+  gem "therubyracer"
+  gem 'mysql2'
+end
 
