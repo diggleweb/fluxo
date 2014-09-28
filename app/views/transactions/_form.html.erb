@@ -18,13 +18,13 @@
   </div>
 
   <div class="row">
-    <div class="small-4 columns">
+    <div class="small-12 medium-4 columns">
       <%= f.select :category_id, options(@categories), label: 'Categoria' %>
     </div>
-    <div class="small-4 columns">
+    <div class="small-12 medium-4 columns">
       <%= f.select :account_id, options(@accounts), label: 'Conta' %>
     </div>
-    <div class="small-4 columns">
+    <div class="small-12 medium-4 columns">
       <%= f.select :payee_id, options(@payees), label: 'Beneficiado', include_blank: true %>
     </div>
   </div>
@@ -32,12 +32,12 @@
   <hr />
 
   <div class="row">
-    <div class="small-6 columns">
+    <div class="small-12 medium-6 columns">
       <h6>Estimativa</h6>
       <%= f.text_field :date_estimated, type: 'date', label: 'Data prevista', order: [:day, :month, :year] %>
       <%= f.text_field :amount_estimated, label: 'Estimativa' %>
     </div>
-    <div class="small-6 columns">
+    <div class="small-12 medium-6 columns">
       <%= f.check_box :commited, label: 'Já aconteceu', checked: @transaction.commited, class: 'checkbox_commited' %>
 
       <%= f.text_field :date_transaction, type: 'date', label: 'Data de execução', order: [:day, :month, :year] %>
