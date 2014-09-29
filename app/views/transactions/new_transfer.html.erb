@@ -1,0 +1,43 @@
+<h1>
+  Nova transferência entre contas
+</h1>
+
+<p>
+  Uma transferência entre contas significa duas transações, sendo uma de saída de
+  uma conta e outra como entrada na conta destino. Desta forma, uma transferencia
+  não é editável e não altera o valor de seu balanço. Apenas faz a transferencia 
+  de valores entre as contas.
+</p>
+
+<%= form_for @transaction do |f| %>
+
+  <div class="row">
+    <div class="small-12 medium-5 columns">
+      <%= f.select :account_id, options(@accounts), label: 'Conta origem' %>
+    </div>
+    <div class="medium-2 columns text-center hide-for-small-only">
+      <label>&nbsp;</label>
+      <span class="button disabled radius tiny"><i class="fi-arrow-right"></i></span>
+    </div>
+    <div class="small-12 medium-5 columns">
+      <%= f.select :account_id, options(@accounts), label: 'Conta destino' %>
+    </div>
+  </div>
+
+  <div class="row estimated-commit-panels" data-equalizer>
+    <div class="small-12 medium-6 columns" data-equalizer-watch>
+      <h6>Estimativa</h6>
+      <%= f.text_field :date_estimated, type: 'date', label: 'Data prevista', order: [:day, :month, :year] %>
+      <%= f.text_field :amount_estimated, label: 'Estimativa' %>
+    </div>
+    <div class="small-12 medium-6 columns" data-equalizer-watch>
+      <%= f.check_box :commited, label: 'Já aconteceu', checked: @transaction.commited, class: 'checkbox_commited' %>
+
+      <%= f.text_field :date_transaction, type: 'date', label: 'Data de execução', order: [:day, :month, :year] %>
+      <%= f.text_field :amount, label: 'Valor real' %>
+    </div>
+  </div>
+
+  <%= f.submit 'Criar transferência' %>
+
+<% end %>
