@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
@@ -71,6 +73,43 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def new_transfer
+    @transaction = Transaction.new
+    @categories = Category.all
+    @accounts = Account.all
+    @payees = Payee.all
+  end
+
+  def create_transfer
+    from_account = Account.find(transfer_params[:account_id].first)
+    to_account = Account.find(transfer_params[:account_id].last)
+
+    transfer_params[:account_id].each_with_index do |account_id, index|
+      info = 'Transferencia entre contas'
+      description = 'Transferencia entre contas: %s → %s' % [from_account.name, to_account.name]
+      amount = transfer_params[:amount]
+      amount_estimated = transfer_params[:amount_estimated]
+      if index == 0
+        amount = -1 * (amount)
+        amount_estimated = -1 * (amount_estimated)
+      end
+      transaction_attributes = transfer_params.merge(
+        account_id: account_id,
+        info: info,
+        description: description,
+        amount: amount,
+        amount_estimated: amount_estimated
+      )
+      transaction = Transaction.new transaction_attributes
+      transaction.save
+    end
+
+    respond_to do |format|
+      format.html { redirect_to transactions_url, notice: 'Transaction was successfully created.' }
+      format.json { render :show, status: :created, location: @transaction }
+    end    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
@@ -80,5 +119,16 @@ class TransactionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
       params.require(:transaction).permit(:category_id, :account_id, :info, :amount_estimated, :amount, :date_estimated, :date_transaction, :commited, :payee_id, :description)
+    end
+
+    def transfer_params
+      transfer ||= params
+        .require(:transaction)
+        .permit(:amount_estimated, :amount, :date_estimated, :date_transaction, :commited, :account_id => [:account_id])
+        .tap do |t|
+          t[:account_id] = t[:account_id].map { |k, v| v[:account_id] }
+          t[:amount] = t[:amount].to_f
+          t[:amount_estimated] = t[:amount_estimated].to_f
+        end
     end
 end

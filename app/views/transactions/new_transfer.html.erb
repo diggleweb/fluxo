@@ -9,18 +9,22 @@
   de valores entre as contas.
 </p>
 
-<%= form_for @transaction do |f| %>
+<%= form_for @transaction, url: {action: :create_transfer} do |f| %>
 
   <div class="row">
     <div class="small-12 medium-5 columns">
-      <%= f.select :account_id, options(@accounts), label: 'Conta origem' %>
+      <%= f.fields_for :account_id, @transaction, index: 0 do |t_form| %>
+        <%= t_form.select :account_id, options(@accounts), label: 'Conta origem' %>
+      <% end %>
     </div>
     <div class="medium-2 columns text-center hide-for-small-only">
       <label>&nbsp;</label>
       <span class="button disabled radius tiny"><i class="fi-arrow-right"></i></span>
     </div>
     <div class="small-12 medium-5 columns">
-      <%= f.select :account_id, options(@accounts), label: 'Conta destino' %>
+      <%= f.fields_for :account_id, @transaction, index: 1 do |t_form| %>
+        <%= t_form.select :account_id, options(@accounts), label: 'Conta origem' %>
+      <% end %>
     </div>
   </div>
 

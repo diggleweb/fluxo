@@ -45,3 +45,9 @@ input.checkbox_commited {
 .text-mutted {
 	color: $jumbo;
 }
+
+@media #{$medium-up} {
+  .estimated-commit-panels .columns:nth-child(1) {
+      border-right: 1px solid $gainsboro;
+  }
+}

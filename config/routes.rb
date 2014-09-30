@@ -19,7 +19,12 @@ Rails.application.routes.draw do
 
   resources :accounts
   resources :categories
-  resources :transactions
+  resources :transactions do
+    collection do
+      get  'new/transfer' => 'transactions#new_transfer', as: :new_transfer
+      post 'new/transfer' => 'transactions#create_transfer', as: :create_transfer
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
