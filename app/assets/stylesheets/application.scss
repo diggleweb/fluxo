@@ -22,6 +22,13 @@ table .button {
 	margin-bottom: 0;
 }
 
+@media (min-width: 40em) {
+	table.tablesaw-stack td, table.tablesaw-stack th, table.tablesaw-stack thead td, table.tablesaw-stack thead th {
+		font-size: 0.77778rem;
+		padding: 0.2rem 1rem;
+	}
+}
+
 .category-bullet {
 	border: 1px solid #AAAAAA;
 	border-radius: 50%;
