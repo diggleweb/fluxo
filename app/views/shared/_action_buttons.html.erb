@@ -1,3 +1,3 @@
 
-<%= link_to 'editar', { controller: controller, id: object.id, action: :edit    }, { class: 'button tiny' } %>
-<%= link_to 'apagar', { controller: controller, id: object.id, action: :destroy }, { class: 'button tiny alert', data: { confirm: 'Tem certeza?', method: :delete } } %>
+<%= link_to '<span class="fi-pencil"></span>'.html_safe, { controller: controller, id: object.id, action: :edit    }, { class: 'button tiny' } %>
+<%= link_to '<span class="fi-x"></span>'.html_safe, { controller: controller, id: object.id, action: :destroy }, { class: 'button tiny alert', data: { confirm: 'Tem certeza?', method: :delete } } %>
