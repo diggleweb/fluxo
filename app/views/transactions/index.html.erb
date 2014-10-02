@@ -10,7 +10,6 @@
 <table class="tablesaw tablesaw-stack" data-mode="stack">
   <thead>
     <tr>
-      <th scope="column" width="50">#ID</th>
       <th scope="column">Infomação</th>
       <th scope="column">Beneficiado</th>
       <th scope="column">Estimativa</th>
@@ -25,12 +24,13 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= link_to transaction.id, transaction %></td>
         <td>
-          <%= category_bullet transaction.category %>
-          <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= tip transaction %>">
-            <%= transaction.info %>
-          </span>
+          <%= link_to transaction do %>
+            <%= category_bullet transaction.category %>
+            <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= tip transaction %>">
+              <%= transaction.info %>
+            </span>
+          <% end %>
         </td>
         <td><%= transaction.payee ? transaction.payee.name : '-' %></td>
         <td class="<%= error_class transaction.amount_estimated %>">R$ <%= '%.2f' % (transaction.amount_estimated || 0) %></td>
@@ -38,10 +38,7 @@
         <td class="<%= error_class transaction.amount %>">R$ <%= '%.2f' % (transaction.amount || 0) %></td>
         <td><%= transaction.date_transaction || '--' %></td>
         <td><%= transaction.commited ? 'Sim' : 'Não' %></td>
-        <td>
-        <%= link_to 'editar', edit_transaction_path(transaction), class: 'button tiny' %>
-        <%= link_to 'apagar', transaction, method: :delete, class: 'button alert tiny', data: { confirm: 'Tem certeza?' } %>
-        </td>
+        <td><%= render partial: 'shared/action_buttons', locals: { controller: "transactions", object: transaction } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -15,7 +15,6 @@
 <table class="tablesaw tablesaw-stack" data-mode="stack">
   <thead>
     <tr>
-      <th scope="column" width="50">#ID</th>
       <th scope="column">Nome</th>
       <th scope="column" width="170">Ações</th>
     </tr>
@@ -24,12 +23,8 @@
   <tbody>
     <% @payees.each do |payee| %>
       <tr>
-        <td><%= link_to payee.id, payee %></td>
-        <td><%= payee.name %></td>
-        <td>
-        <%= link_to 'editar', edit_payee_path(payee), class: 'button tiny' %>
-        <%= link_to 'apagar', payee, method: :delete, class: 'button alert tiny', data: { confirm: 'Tem certeza?' } %>
-        </td>
+        <td><%= link_to payee.name, payee %></td>
+	<td><%= render partial: 'shared/action_buttons', locals: { controller: "payees", object: payee } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -14,7 +14,6 @@
 <table class="tablesaw tablesaw-stack" data-mode="stack">
   <thead>
     <tr>
-      <th scope="column" width="50">#ID</th>
       <th scope="column" width="200">Nome</th>
       <th scope="column">Descrição</th>
       <th scope="column">Saldo Estimado</th>
@@ -26,15 +25,11 @@
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
-        <td><%= link_to account.id, account %></td>
-        <td><%= account.name %></td>
+        <td><%= link_to account.name, account %></td>
         <td><%= account.description %></td>
         <td class="<%= error_class account.balance_estimated %>">R$ <%= '%.2f' % (account.balance_estimated || 0) %></td>
         <td class="<%= error_class account.balance %>">R$ <%= '%.2f' % (account.balance || 0) %></td>
-      <td>
-        <%= link_to 'editar', edit_account_path(account), class: 'button tiny' %>
-        <%= link_to 'apagar', account, method: :delete, class: 'button alert tiny', data: { confirm: 'Tem certeza?' } %>
-      </td>
+	<td><%= render partial: 'shared/action_buttons', locals: { controller: "accounts", object: account } %></td>
       </tr>
     <% end %>
   </tbody>

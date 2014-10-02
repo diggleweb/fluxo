@@ -1,45 +1,42 @@
 <h1>
-	<span class="fi-book"></span>
-	Categorias
-	<a href="/categories/new" class="round button tiny">
-		<span class="fi-plus"></span>&nbsp;
-		criar
-	</a>
+  <span class="fi-book"></span>
+  Categorias
+  <a href="/categories/new" class="round button tiny">
+    <span class="fi-plus"></span>&nbsp;
+    criar
+  </a>
 </h1>
 
 <p>
-	Cada transação é aplicada a uma categoria, essas categorias são utilizadas
-	para que no futuro seja possível saber onde estão sendo feitos os maiores
-	gastos ou onde é possível fazer economias.
+  Cada transação é aplicada a uma categoria, essas categorias são utilizadas
+  para que no futuro seja possível saber onde estão sendo feitos os maiores
+  gastos ou onde é possível fazer economias.
 </p>
 
 <% flash.each do |name, msg| -%>
-	<%= content_tag :div, msg, class: "alert-box #{name}" %>
+  <%= content_tag :div, msg, class: "alert-box #{name}" %>
 <% end -%>
 
 <table class="tablesaw tablesaw-stack" data-mode="stack">
-	<thead>
-		<tr>
-			<th scope="column" width="50">#ID</th>
-			<th scope="column" width="200">Nome</th>
-			<th scope="column">Descrição</th>
-			<th scope="column" width="170">Ação</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @categories.each do |category| %>
-		<tr>
-			<td><%= link_to category.id, category %></td>
-			<td>
-				<%= category_bullet category %>
-				<%= category.name %>
-			</td>
-			<td><%= category.description %></td>
-			<td>
-				<%= link_to 'editar', edit_category_path(category), class: 'button tiny' %>
-				<%= link_to 'apagar', category, method: :delete, class: 'button alert tiny', data: { confirm: 'Tem certeza?' } %>
-			</td>
-		</tr>
-		<% end %>
-	</tbody>
+  <thead>
+    <tr>
+      <th scope="column" width="200">Nome</th>
+      <th scope="column">Descrição</th>
+      <th scope="column" width="170">Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+    <tr>
+      <td>
+        <%= link_to category do %>
+        <%= category_bullet category %>
+        <%= category.name %>
+	<% end %>
+      </td>
+      <td><%= category.description %></td>
+      <td><%= render partial: 'shared/action_buttons', locals: { controller: "categories", object: category } %></td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>
