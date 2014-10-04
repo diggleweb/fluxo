@@ -38,7 +38,11 @@
         <td class="<%= cel_amount_class transaction %>">R$ <%= '%.2f' % transaction.show_amount %></td>
         <td><%= transaction.date_transaction || '--' %></td>
         <td><%= transaction.commited ? 'Sim' : 'Não' %></td>
-        <td><%= render partial: 'shared/action_buttons', locals: { controller: "transactions", object: transaction } %></td>
+        <td>
+          <% if [:in, :out].include? transaction.transaction_type.to_sym %>
+            <%= render partial: 'shared/action_buttons', locals: { controller: "transactions", object: transaction } %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
