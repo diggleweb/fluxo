@@ -24,6 +24,12 @@ class Transaction < ActiveRecord::Base
 
   validates :date_transaction, :amount, presence: true, if: "true == commited"
 
+  scope :alowed_for_sum, -> { 
+    types = self.transaction_types
+
+    where(transaction_type: [ types[:in], types[:out], types[:hidden] ] )
+  }
+
   after_save :update_account
 
   before_validation :correct_values

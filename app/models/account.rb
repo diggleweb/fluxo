@@ -10,8 +10,8 @@ class Account < ActiveRecord::Base
 	protected
 
 		def update_balance
-			self.balance = Transaction.where(account: self.id).sum :amount
-			self.balance_estimated = Transaction.where(account: self.id).sum :amount_estimated
+			self.balance = Transaction.alowed_for_sum.where(account: self.id).sum :amount
+			self.balance_estimated = Transaction.alowed_for_sum.where(account: self.id).sum :amount_estimated
 		end
 
 		def create_transaction_from_start_ammount
