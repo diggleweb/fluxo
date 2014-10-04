@@ -6,7 +6,9 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all.order('date_estimated DESC, id DESC')
+    types = Transaction.transaction_types
+    where_types = { transaction_type: [ types[:in], types[:out], types[:balance], types[:transfer] ] }
+    @transactions = Transaction.where(where_types).order('date_estimated DESC, id DESC')
   end
 
   # GET /transactions/1

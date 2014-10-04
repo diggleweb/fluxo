@@ -28,6 +28,24 @@ class Transaction < ActiveRecord::Base
 
   before_validation :correct_values
 
+  def show_amount
+    case self.transaction_type.to_sym
+    when :in, :out, :balance
+      self.amount || 0
+    when :transfer
+      self.amount_show || 0
+    end
+  end
+
+  def show_amount_estimated
+    case self.transaction_type.to_sym
+    when :in, :out, :balance
+      self.amount_estimated || 0
+    when :transfer
+      self.amount_show_estimated || 0
+    end
+  end
+
   protected
 
     def update_account

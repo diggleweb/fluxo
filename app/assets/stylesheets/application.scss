@@ -45,6 +45,18 @@ a.button {
 	color: $alert-color;
 }
 
+.positive {
+	color: $success-color;
+}
+
+.balance {
+	color: $jumbo;
+}
+
+.transfer {
+	color: $primary-color;
+}
+
 input.checkbox_commited {
 	margin-top: 5px;
 }

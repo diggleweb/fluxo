@@ -33,9 +33,9 @@
           <% end %>
         </td>
         <td><%= transaction.payee ? transaction.payee.name : '-' %></td>
-        <td class="<%= error_class transaction.amount_estimated %>">R$ <%= '%.2f' % (transaction.amount_estimated || 0) %></td>
+        <td class="<%= cel_amount_class transaction %>">R$ <%= '%.2f' % (transaction.show_amount_estimated || 0) %></td>
         <td><%= transaction.date_estimated %></td>
-        <td class="<%= error_class transaction.amount %>">R$ <%= '%.2f' % (transaction.amount || 0) %></td>
+        <td class="<%= cel_amount_class transaction %>">R$ <%= '%.2f' % transaction.show_amount %></td>
         <td><%= transaction.date_transaction || '--' %></td>
         <td><%= transaction.commited ? 'Sim' : 'Não' %></td>
         <td><%= render partial: 'shared/action_buttons', locals: { controller: "transactions", object: transaction } %></td>
