@@ -1,24 +1,55 @@
 class Transaction < ActiveRecord::Base
-    belongs_to :category
-    belongs_to :account
-    belongs_to :payee
+  enum transaction_type: {
+    :in => 0, :out => 1,          # show (green/red) and sumarize
+    :balance => 2,                # show as special (gray), do not sumarize
+    :transfer => 3,               # show as special (blue), do not sumarize
+    :hidden => 4,                 # do not show, sumarize
+    :fake_in => 5, :fake_out => 6 # show as some value, sumarize as some another value
+  }
 
-    validates :info,
-              :amount_estimated,
-              :date_estimated,
-              presence: true
+  belongs_to :category
+  belongs_to :account
+  belongs_to :payee
 
-    validates :commited,  inclusion: { in: [false, true] }, allow_nil: false
+  validates :info,
+            :account,
+            :transaction_type,
+            :amount_estimated,
+            :date_estimated,
+            presence: true
 
-    validates :info, length: { maximum: 40 }
+  validates :commited,  inclusion: { in: [false, true] }, allow_nil: false
 
-    validates :date_transaction, :amount, presence: true, if: "true == commited"
+  validates :info, length: { maximum: 40 }
 
-    after_save :update_account
+  validates :date_transaction, :amount, presence: true, if: "true == commited"
 
-    protected
+  after_save :update_account
 
-      def update_account
-        self.account.save
+  before_validation :correct_values
+
+  protected
+
+    def update_account
+      self.account.save
+    end
+
+    def correct_values
+      return if !transaction_type
+
+      case transaction_type.to_sym
+      when :in
+        self.amount = (amount || 0).abs
+        self.amount_estimated = (amount_estimated || 0).abs
+      when :out
+        self.amount = -((amount || 0).abs)
+        self.amount_estimated = -((amount_estimated || 0).abs)
+      when :transfer
+        self.amount_show = (amount || 0).abs
+        self.amount_show_estimated = (amount_estimated || 0).abs
+        self.amount = 0
+        self.amount_estimated = 0
       end
+    end
+
 end
