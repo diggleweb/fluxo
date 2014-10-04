@@ -29,6 +29,7 @@ class Transaction < ActiveRecord::Base
   before_validation :correct_values
 
   def show_amount
+    return 0 unless self.transaction_type.present?
     case self.transaction_type.to_sym
     when :in, :out, :balance
       self.amount || 0
@@ -38,6 +39,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def show_amount_estimated
+    return 0 unless self.transaction_type.present?
     case self.transaction_type.to_sym
     when :in, :out, :balance
       self.amount_estimated || 0

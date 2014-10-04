@@ -59,6 +59,7 @@ class TransactionsController < ApplicationController
       else
         @categories = Category.all
         @accounts = Account.all
+        @payees = Payee.all
         format.html { render :edit }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
@@ -75,6 +76,7 @@ class TransactionsController < ApplicationController
     end
   end
 
+  # GET /transactions/new/transfer
   def new_transfer
     @transaction = Transaction.new
     @categories = Category.all
@@ -82,7 +84,9 @@ class TransactionsController < ApplicationController
     @payees = Payee.all
   end
 
+  # POST /transactions/new/transfer
   def create_transfer
+    types = Transaction.transaction_types
     from_account = Account.find(transfer_params[:account_id].first)
     to_account = Account.find(transfer_params[:account_id].last)
 
@@ -97,14 +101,22 @@ class TransactionsController < ApplicationController
       end
       transaction_attributes = transfer_params.merge(
         account_id: account_id,
+        transaction_type: types[:hidden],
         info: info,
         description: description,
         amount: amount,
-        amount_estimated: amount_estimated
+        amount_estimated: amount_estimated,
       )
       transaction = Transaction.new transaction_attributes
       transaction.save
     end
+
+    transaction = Transaction.last
+    transaction_showed = Transaction.new transaction.as_json.except("id")
+    transaction_showed.transaction_type = types[:transfer]
+    transaction_showed.amount = transfer_params[:amount]
+    transaction_showed.amount_estimated = transfer_params[:amount_estimated]
+    transaction_showed.save
 
     respond_to do |format|
       format.html { redirect_to transactions_url, notice: 'Transaction was successfully created.' }
@@ -127,6 +139,9 @@ class TransactionsController < ApplicationController
           :amount, :date_estimated, :date_transaction, :commited, :payee_id,
           :description, :transaction_type
         )
+        .tap do |p|
+          p[:transaction_type] = Transaction.transaction_types.invert[p[:transaction_type].to_i]
+        end
     end
 
     def transfer_params
