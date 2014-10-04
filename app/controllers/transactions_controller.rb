@@ -18,7 +18,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    @transaction = Transaction.new
+    @transaction = Transaction.new transaction_type: Transaction.transaction_types[:in]
     @categories = Category.all
     @accounts = Account.all
     @payees = Payee.all
@@ -120,7 +120,13 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:category_id, :account_id, :info, :amount_estimated, :amount, :date_estimated, :date_transaction, :commited, :payee_id, :description)
+      params
+        .require(:transaction)
+        .permit(
+          :category_id, :account_id, :info, :amount_estimated,
+          :amount, :date_estimated, :date_transaction, :commited, :payee_id,
+          :description, :transaction_type
+        )
     end
 
     def transfer_params
