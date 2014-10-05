@@ -17,7 +17,7 @@
       <th scope="column">Valor</th>
       <th scope="column">Data</th>
       <th scope="column">Já aconteceu?</th>
-      <th scope="column" width="130">Ação</th>
+      <th scope="column" width="175">Ação</th>
     </tr>
   </thead>
 
@@ -39,6 +39,9 @@
         <td><%= transaction.date_transaction || '--' %></td>
         <td><%= transaction.commited ? 'Sim' : 'Não' %></td>
         <td>
+          <% if [:in, :out].include?(transaction.transaction_type.to_sym) && not(transaction.commited?) %>
+            <script>document.write('<button onclick="commit_transaction(<%= transaction.id %>)" class="btn success tiny"><i class="fi-checkbox"></i></button>');</script>
+          <% end %>
           <% if [:in, :out].include? transaction.transaction_type.to_sym %>
             <%= render partial: 'shared/action_buttons', locals: { controller: "transactions", object: transaction } %>
           <% end %>
