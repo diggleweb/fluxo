@@ -13,10 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require turbolinks
 //= require tablesaw
 
-// $(function(){ $(document).foundation(); });
-$(function () {
-  $(document).foundation();
-});
+$(document).foundation();
