@@ -140,7 +140,7 @@ class TransactionsController < ApplicationController
           :description, :transaction_type
         )
         .tap do |p|
-          p[:transaction_type] = Transaction.transaction_types.invert[p[:transaction_type].to_i]
+          p[:transaction_type] = Transaction.transaction_types.invert[p[:transaction_type].to_i] if p[:transaction_type]
         end
     end
 

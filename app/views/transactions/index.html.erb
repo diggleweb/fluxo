@@ -40,7 +40,7 @@
         <td><%= transaction.commited ? 'Sim' : 'Não' %></td>
         <td>
           <% if [:in, :out].include?(transaction.transaction_type.to_sym) && not(transaction.commited?) %>
-            <script>document.write('<button onclick="commit_transaction(<%= transaction.id %>)" class="btn success tiny"><i class="fi-checkbox"></i></button>');</script>
+            <script>document.write('<button onclick="commit_transaction(<%= transaction.id %>, <%= transaction.show_amount_estimated.abs %>, &#39;<%= transaction.date_estimated %>&#39;)" class="btn success tiny"><i class="fi-arrow-down"></i></button>');</script>
           <% end %>
           <% if [:in, :out].include? transaction.transaction_type.to_sym %>
             <%= render partial: 'shared/action_buttons', locals: { controller: "transactions", object: transaction } %>
@@ -50,3 +50,24 @@
     <% end %>
   </tbody>
 </table>
+
+<div id="commit-action" class="reveal-modal medium" data-reveal>
+  <h1>Confirmando transação</h1>
+  <%= form_for Transaction.new, method: :put, url: transaction_path('1') do |f| %>
+    <%= f.hidden_field :commited, value: 1 %>
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <%= f.text_field :date_transaction, type: 'date', label: 'Data de execução' %>
+      </div>
+      <div class="small-12 medium-6 columns">
+        <%= f.text_field :amount, label: 'Valor real', type: 'number', step: 'any' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+        <%= f.submit 'Atualizar' %>
+      </div>
+    </div>
+  <% end %>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
