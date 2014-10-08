@@ -9,7 +9,7 @@ class AddTypeAmountShowToTransaction < ActiveRecord::Migration
     reversible do |dir|
       dir.up do
         Transaction.all.each do |t|
-          t.transaction_type = t.amount >= 0 ? :in : :out
+          t.transaction_type = (t.amount >= 0 ? :in : :out) unless t.amount.nil?
           t.transaction_type = :hidden if "Transferencia entre contas" === t.info
           t.save
         end
