@@ -56,21 +56,8 @@
     <div class="row">
       <div class="small-12 columns">
       
-        <% if notice.present? %>
-            <div data-alert class="alert-box info radius">
-              <%= notice %>
-              <a href="#" class="close">&times;</a>
-            </div>
-        <% end %>
-
-        <% if alert.present? %>
-            <div data-alert class="alert-box alert radius">
-              <%= alert %>
-              <a href="#" class="close">&times;</a>
-            </div>
-        <% end %>
-
         <%= yield %>
+
       </div>
     </div>
 

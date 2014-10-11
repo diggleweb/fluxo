@@ -7,6 +7,10 @@
   <% end %>
 </h1>
 
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: "alert-box #{name}" %>
+<% end -%>
+
 <table class="tablesaw tablesaw-stack" data-mode="stack">
   <thead>
     <tr>

@@ -12,6 +12,10 @@
   Use-os para saber quem retém a maior parte de seus gastos.
 </p>
 
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: "alert-box #{name}" %>
+<% end -%>
+
 <table class="tablesaw tablesaw-stack" data-mode="stack">
   <thead>
     <tr>
