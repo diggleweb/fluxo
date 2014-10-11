@@ -2,6 +2,7 @@
 
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_associations, only: [:new, :edit, :create, :update]
 
   # GET /transactions
   # GET /transactions.json
@@ -19,16 +20,10 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new transaction_type: Transaction.transaction_types[:in]
-    @categories = Category.all
-    @accounts = Account.all
-    @payees = Payee.all
   end
 
   # GET /transactions/1/edit
   def edit
-    @categories = Category.all
-    @accounts = Account.all
-    @payees = Payee.all
   end
 
   # POST /transactions
@@ -41,8 +36,6 @@ class TransactionsController < ApplicationController
         format.html { redirect_to transactions_url, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
       else
-        @categories = Category.all
-        @accounts = Account.all
         format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
@@ -57,9 +50,6 @@ class TransactionsController < ApplicationController
         format.html { redirect_to transactions_url, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
       else
-        @categories = Category.all
-        @accounts = Account.all
-        @payees = Payee.all
         format.html { render :edit }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
@@ -125,6 +115,12 @@ class TransactionsController < ApplicationController
   end
 
   private
+    def set_associations
+      @accounts = Account.all
+      @categories = Category.all
+      @payees = Payee.all
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
       @transaction = Transaction.find(params[:id])
