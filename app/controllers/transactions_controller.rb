@@ -116,9 +116,9 @@ class TransactionsController < ApplicationController
 
   private
     def set_associations
-      @accounts = Account.all
-      @categories = Category.all
-      @payees = Payee.all
+      @accounts = Account.all.order :name
+      @categories = Category.all.order :name
+      @payees = Payee.all.order :name
     end
 
     # Use callbacks to share common setup or constraints between actions.
