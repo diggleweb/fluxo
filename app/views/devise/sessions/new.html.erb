@@ -2,10 +2,31 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-	<%= f.email_field :email, autofocus: true %>
-	<%= f.password_field :password, autocomplete: "off" %>
+	<div class="row collapse">
+		<div class="small-12">
+			<label>E-mail</label>
+		</div>
+		<div class="small-2 columns">
+		  <span class="prefix"><i class="fi-mail"></i></span>
+		</div>
+		<div class="small-10 columns">
+			<%= f.email_field :email, autofocus: true, label: false %>
+		</div>
+	</div>
 
-	<% if devise_mapping.rememberable? %><%= f.check_box :remember_me %><% end %>
+	<div class="row collapse">
+		<div class="small-12">
+			<label>Senha</label>
+		</div>
+		<div class="small-2 columns">
+			<span class="prefix"><i class="fi-asterisk"></i></span>
+		</div>
+		<div class="small-10 columns">
+			<%= f.password_field :password, autocomplete: "off", label: false %>
+		</div>
+	</div>
+
+	<% if devise_mapping.rememberable? %><%= f.check_box :remember_me, label: ' Lembrar a senha' %><% end %>
 
 	<%= f.submit "Log in" %>
 
