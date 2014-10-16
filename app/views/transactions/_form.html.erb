@@ -45,13 +45,13 @@
     <div class="small-12 medium-6 columns">
       <h6>Estimativa</h6>
       <%= f.text_field :date_estimated, type: 'date', label: 'Data prevista', order: [:day, :month, :year] %>
-      <%= f.text_field :amount_estimated, label: 'Estimativa', value: @transaction.show_amount_estimated.abs %>
+      <%= f.number_field :amount_estimated, label: 'Estimativa', value: @transaction.show_amount_estimated.abs %>
     </div>
     <div class="small-12 medium-6 columns">
       <%= f.check_box :commited, label: 'Já aconteceu', checked: @transaction.commited, class: 'checkbox_commited' %>
 
       <%= f.text_field :date_transaction, type: 'date', label: 'Data de execução', order: [:day, :month, :year] %>
-      <%= f.text_field :amount, label: 'Valor real', value: @transaction.show_amount.abs %>
+      <%= f.number_field :amount, label: 'Valor real', value: @transaction.show_amount.abs %>
     </div>
   </div>
 
