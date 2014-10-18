@@ -21,7 +21,7 @@
       <th scope="column">Valor</th>
       <th scope="column">Data</th>
       <th scope="column">Já aconteceu?</th>
-      <th scope="column" width="175">Ação</th>
+      <th scope="column" width="130">Ação</th>
     </tr>
   </thead>
 
@@ -56,6 +56,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @posts, renderer: FoundationPagination::Rails %>
 
 <div id="commit-action" class="reveal-modal medium" data-reveal>
   <h1>Confirmando transação</h1>

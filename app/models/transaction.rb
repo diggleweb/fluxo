@@ -34,6 +34,8 @@ class Transaction < ActiveRecord::Base
 
   before_validation :correct_values
 
+  self.per_page = 40
+
   def show_amount
     return 0 unless self.transaction_type.present?
     case self.transaction_type.to_sym

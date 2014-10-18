@@ -9,7 +9,7 @@ class TransactionsController < ApplicationController
   def index
     types = Transaction.transaction_types
     where_types = { transaction_type: [ types[:in], types[:out], types[:balance], types[:transfer] ] }
-    @transactions = Transaction.where(where_types).order('date_estimated DESC, id DESC')
+    @transactions = Transaction.where(where_types).order('date_estimated DESC, id DESC').paginate(:page => params[:page])
   end
 
   # GET /transactions/1

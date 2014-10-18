@@ -31,8 +31,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'devise'
-
 gem 'ofx'
+gem 'will_paginate'
+gem 'will_paginate-foundation'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
