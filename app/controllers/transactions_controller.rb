@@ -2,7 +2,7 @@
 
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-  before_action :set_associations, only: [:new, :edit, :create, :update]
+  before_action :set_associations, only: [:new, :edit, :create, :update, :new_transfer]
 
   # GET /transactions
   # GET /transactions.json
@@ -69,9 +69,6 @@ class TransactionsController < ApplicationController
   # GET /transactions/new/transfer
   def new_transfer
     @transaction = Transaction.new
-    @categories = Category.all
-    @accounts = Account.all
-    @payees = Payee.all
   end
 
   # POST /transactions/new/transfer
