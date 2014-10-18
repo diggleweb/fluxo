@@ -43,12 +43,14 @@
         <td><%= transaction.date_transaction || '--' %></td>
         <td><%= transaction.commited ? 'Sim' : 'Não' %></td>
         <td>
+          <ul class="button-group radius">
           <% if [:in, :out].include?(transaction.transaction_type.to_sym) && not(transaction.commited?) %>
-            <script>document.write('<button onclick="commit_transaction(<%= transaction.id %>, <%= transaction.show_amount_estimated.abs %>, &#39;<%= transaction.date_estimated %>&#39;)" class="btn success tiny"><i class="fi-arrow-down"></i></button>');</script>
+            <li><button onclick="commit_transaction(<%= transaction.id %>, <%= transaction.show_amount_estimated.abs %>, &#39;<%= transaction.date_estimated %>&#39;)" class="btn success tiny"><i class="fi-arrow-down"></i></button></li>
           <% end %>
           <% if [:in, :out].include? transaction.transaction_type.to_sym %>
             <%= render partial: 'shared/action_buttons', locals: { controller: "transactions", object: transaction } %>
           <% end %>
+          </ul>
         </td>
       </tr>
     <% end %>

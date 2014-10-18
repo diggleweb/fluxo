@@ -33,7 +33,7 @@
         <td><%= account.description %></td>
         <td class="<%= error_class account.balance_estimated %>">R$ <%= '%.2f' % (account.balance_estimated || 0) %></td>
         <td class="<%= error_class account.balance %>">R$ <%= '%.2f' % (account.balance || 0) %></td>
-	<td><%= render partial: 'shared/action_buttons', locals: { controller: "accounts", object: account } %></td>
+	<td><ul class="button-group radius"><%= render partial: 'shared/action_buttons', locals: { controller: "accounts", object: account } %></ul></td>
       </tr>
     <% end %>
   </tbody>

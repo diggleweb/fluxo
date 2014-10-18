@@ -28,7 +28,7 @@
     <% @payees.each do |payee| %>
       <tr>
         <td><%= link_to payee.name, payee %></td>
-	<td><%= render partial: 'shared/action_buttons', locals: { controller: "payees", object: payee } %></td>
+	<td><ul class="button-group radius"><%= render partial: 'shared/action_buttons', locals: { controller: "payees", object: payee } %></ul></td>
       </tr>
     <% end %>
   </tbody>

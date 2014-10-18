@@ -35,7 +35,7 @@
 	<% end %>
       </td>
       <td><%= category.description %></td>
-      <td><%= render partial: 'shared/action_buttons', locals: { controller: "categories", object: category } %></td>
+      <td><ul class="button-group radius"><%= render partial: 'shared/action_buttons', locals: { controller: "categories", object: category } %></ul></td>
     </tr>
     <% end %>
   </tbody>
