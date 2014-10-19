@@ -181,6 +181,90 @@ class TransactionsTest < ActiveSupport::TestCase
 
     assert old_balance + 200 == account.balance
     assert old_balance_estimated + 100 == account.balance_estimated
+  end
 
+  test 'trigger correct values before validate transaction' do
+    transaction_types = Transaction.transaction_types
+    transaction = Transaction.new transaction_type: transaction_types[:in], amount: 100
+    transaction.valid?
+    assert transaction.amount == 100
+
+    transaction = Transaction.new transaction_type: transaction_types[:in], amount: -100
+    transaction.valid?
+    assert transaction.amount == 100
+
+    transaction = Transaction.new transaction_type: transaction_types[:out], amount: 500
+    transaction.valid?
+    assert transaction.amount == -500
+
+    transaction = Transaction.new transaction_type: transaction_types[:out], amount: -500
+    transaction.valid?
+    assert transaction.amount == -500
+
+    transaction = Transaction.new transaction_type: transaction_types[:transfer], amount: 350
+    transaction.valid?
+    assert transaction.amount == 0
+    assert transaction.amount_show == 350
+
+    transaction = Transaction.new transaction_type: transaction_types[:transfer], amount: -350
+    transaction.valid?
+    assert transaction.amount == 0
+    assert transaction.amount_show == 350
+  end
+
+  test 'show_amount always respond with integer' do
+    transaction_types = Transaction.transaction_types
+
+    transaction = Transaction.new transaction_type: transaction_types[:in], amount: nil
+    assert 0 == transaction.show_amount
+
+    transaction = Transaction.new transaction_type: transaction_types[:in], amount: 100
+    assert 100 == transaction.show_amount
+
+    transaction = Transaction.new transaction_type: transaction_types[:out], amount: nil
+    assert 0 == transaction.show_amount
+
+    transaction = Transaction.new transaction_type: transaction_types[:out], amount: 100
+    assert 100 == transaction.show_amount
+
+    transaction = Transaction.new transaction_type: transaction_types[:balance], amount: nil
+    assert 0 == transaction.show_amount
+
+    transaction = Transaction.new transaction_type: transaction_types[:balance], amount: 100
+    assert 100 == transaction.show_amount
+
+    transaction = Transaction.new transaction_type: transaction_types[:transfer], amount: nil, amount_show: 500
+    assert 500 == transaction.show_amount
+
+    transaction = Transaction.new transaction_type: transaction_types[:transfer], amount: 100, amount_show: 500
+    assert 500 == transaction.show_amount
+  end
+
+  test 'show_amount_estimated always respond with integer' do
+    transaction_types = Transaction.transaction_types
+
+    transaction = Transaction.new transaction_type: transaction_types[:in], amount_estimated: nil
+    assert 0 == transaction.show_amount_estimated
+
+    transaction = Transaction.new transaction_type: transaction_types[:in], amount_estimated: 100
+    assert 100 == transaction.show_amount_estimated
+
+    transaction = Transaction.new transaction_type: transaction_types[:out], amount_estimated: nil
+    assert 0 == transaction.show_amount_estimated
+
+    transaction = Transaction.new transaction_type: transaction_types[:out], amount_estimated: 100
+    assert 100 == transaction.show_amount_estimated
+
+    transaction = Transaction.new transaction_type: transaction_types[:balance], amount_estimated: nil
+    assert 0 == transaction.show_amount_estimated
+
+    transaction = Transaction.new transaction_type: transaction_types[:balance], amount_estimated: 100
+    assert 100 == transaction.show_amount_estimated
+
+    transaction = Transaction.new transaction_type: transaction_types[:transfer], amount_estimated: nil, amount_show_estimated: 500
+    assert 500 == transaction.show_amount_estimated
+
+    transaction = Transaction.new transaction_type: transaction_types[:transfer], amount_estimated: 100, amount_show_estimated: 500
+    assert 500 == transaction.show_amount_estimated
   end
 end
