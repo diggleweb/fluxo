@@ -1,9 +1,5 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: MyString
-  description: MyText
-
-two:
-  name: MyString
-  description: MyText
+default:
+  name: 'default'
+  description: 'my default account'
+  balance: 0
+  balance_estimated: 0

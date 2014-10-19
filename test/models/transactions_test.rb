@@ -148,4 +148,39 @@ class TransactionsTest < ActiveSupport::TestCase
     assert transaction.errors.messages.has_key? :date_transaction
     assert transaction.errors.messages.has_key? :amount
   end
+
+  test 'scope :alowed_for_sum only :in, :out, :hidden types' do
+    query_transactions = [
+      Transaction.transaction_types[:in],
+      Transaction.transaction_types[:out],
+      Transaction.transaction_types[:hidden],
+    ]
+    assert Transaction.alowed_for_sum.where_values_hash == {"transaction_type"=> query_transactions} 
+  end
+
+  test 'update account when save transaction' do
+    account = Account.take
+
+    old_balance = account.balance
+    old_balance_estimated = account.balance_estimated
+
+    attrs = {
+      info: 'Anything',
+      transaction_type: Transaction.transaction_types[:in],
+      account: account,
+      amount_estimated: 100,
+      date_estimated: Date.today,
+      commited: true,
+      amount: 200,
+      date_transaction: Date.today,
+    }
+    transaction = Transaction.create attrs
+
+    assert transaction.save
+    account.reload
+
+    assert old_balance + 200 == account.balance
+    assert old_balance_estimated + 100 == account.balance_estimated
+
+  end
 end
