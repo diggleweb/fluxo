@@ -1,4 +1,10 @@
 class TransactionTemplate < ActiveRecord::Base
+  enum transaction_type: {
+    :in => 0, :out => 1
+  }
+
+  belongs_to :category
+
   validates :info, :amount, presence: true
 
   def create_transaction

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019190201) do
+ActiveRecord::Schema.define(version: 20141024040354) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -42,7 +42,11 @@ ActiveRecord::Schema.define(version: 20141019190201) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "transaction_type"
+    t.integer  "category_id"
   end
+
+  add_index "transaction_templates", ["category_id"], name: "index_transaction_templates_on_category_id"
 
   create_table "transactions", force: true do |t|
     t.integer  "category_id"

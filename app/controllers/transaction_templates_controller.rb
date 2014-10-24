@@ -1,5 +1,6 @@
 class TransactionTemplatesController < ApplicationController
   before_action :set_transaction_template, only: [:show, :edit, :update, :destroy]
+  before_action :set_associations, only: [:new, :edit, :create, :update, :new_transfer]
 
   # GET /transaction_templates
   # GET /transaction_templates.json
@@ -70,5 +71,9 @@ class TransactionTemplatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_template_params
       params.require(:transaction_template).permit(:info, :amount, :description)
+    end
+
+    def set_associations
+      @categories = Category.all.order :name
     end
 end

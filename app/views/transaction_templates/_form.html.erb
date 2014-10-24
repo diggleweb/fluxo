@@ -12,10 +12,26 @@
   <% end %>
 
   <div class="row">
-    <div class="small-12 medium-6 columns">
+    <div class="small-12 columns">
       <%= f.text_field :info, label: 'Informações', autofocus: true %>
     </div>
-    <div class="small-12 medium-6 columns">
+  </div>
+
+  <div class="row">
+    <div class="small-12 medium-4 columns">
+      <%
+        transaction_options = options_for_select([
+            ["Entrada", Transaction.transaction_types[:in]],
+            ["Saída", Transaction.transaction_types[:out]]
+          ],
+          TransactionTemplate.transaction_types[@transaction_template.transaction_type]
+        ) %>
+      <%= f.select :transaction_type, transaction_options, label: 'Tipo' %>
+    </div>
+    <div class="small-12 medium-4 columns">
+      <%= f.select :category_id, options(@categories), label: 'Categoria' %>
+    </div>
+    <div class="small-12 medium-4 columns">
       <%= f.number_field :amount, label: 'Valor', step: "any" %>
     </div>
   </div>

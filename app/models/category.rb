@@ -1,5 +1,6 @@
 class Category < ActiveRecord::Base
 	has_many :transactions
+	has_many :transaction_templates
 
 	validates :name,
 			  :color,
