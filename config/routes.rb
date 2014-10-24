@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :transaction_templates
-
-  resources :payees
-
   devise_for :users,
     skip: :registrations,
     path: 'auth',
@@ -21,10 +17,18 @@ Rails.application.routes.draw do
 
   resources :accounts
   resources :categories
+  resources :transaction_templates
+  resources :payees
+
   resources :transactions do
     collection do
-      get  'new/transfer' => 'transactions#new_transfer', as: :new_transfer
-      post 'new/transfer' => 'transactions#create_transfer', as: :create_transfer
+      scope :new do
+        get  'transfer' => 'transactions#new_transfer', as: :new_transfer
+        post 'transfer' => 'transactions#create_transfer', as: :create_transfer
+
+        get 'from_template' => redirect('/transactions'), as: :from_template_index
+        get 'from_template/:id' => 'transactions#new_from_template', as: :from_template
+      end
     end
   end
 

@@ -23,7 +23,7 @@
         <td>R$ <%= '%.2f' % (transaction_template.amount || 0) %></td>
         <td>
           <ul class="button-group radius">
-            <li><button class="btn warning tiny"><i class="fi-check"></i></button></li>
+            <li><%= link_to from_template_transactions_path(transaction_template), class: 'button warning tiny' do %><i class="fi-check"></i><% end %></li>
             <%= render partial: 'shared/action_buttons', locals: { controller: "transaction_templates", object: transaction_template } %>
           </ul>
         </td>

@@ -2,7 +2,7 @@
 
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-  before_action :set_associations, only: [:new, :edit, :create, :update, :new_transfer]
+  before_action :set_associations, only: [:new, :edit, :create, :update, :new_transfer, :new_from_template]
 
   # GET /transactions
   # GET /transactions.json
@@ -109,6 +109,12 @@ class TransactionsController < ApplicationController
       format.html { redirect_to transactions_url, notice: 'Transaction was successfully created.' }
       format.json { render :show, status: :created, location: @transaction }
     end    
+  end
+
+  def new_from_template
+    @transaction_template = TransactionTemplate.find params.fetch(:id)
+    @transaction = @transaction_template.create_transaction
+    render :new
   end
 
   private
