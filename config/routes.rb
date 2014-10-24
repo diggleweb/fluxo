@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :transaction_templates
+
   resources :payees
 
   devise_for :users,
