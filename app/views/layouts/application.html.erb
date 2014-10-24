@@ -30,8 +30,10 @@
             <ul class="dropdown">
               <li><a href="<%= transactions_path %>">Gerenciar</a></li>
               <li class="divider"></li>
-              <li><a href="<%= new_transaction_path %>">Adicionar</a></li>
-              <li><a href="<%= new_transfer_transactions_path %>">Adicionar Transferencia</a></li>
+              <li><%= link_to "Adicionar", new_transaction_path %></li>
+              <li><%= link_to "Adicionar Transferencia", new_transfer_transactions_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to 'Templates', transaction_templates_path %></li>
             </ul>
           </li>
           <li><%= link_to 'Categorias', categories_path %></li>
@@ -40,10 +42,7 @@
         </ul>
         <ul class="right">
           <li class="show-for-medium-up">
-            <a href="#">
-              <span class="fi-torso"></span>
-              <%= current_user.email %>
-            </a>
+            <a href="#"><span class="fi-torso"></span> <%= current_user.email %></a>
           </li>
           <li class="divider"></li>
           <li>

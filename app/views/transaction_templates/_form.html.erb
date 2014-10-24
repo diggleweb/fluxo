@@ -1,0 +1,31 @@
+<%= form_for(@transaction_template) do |f| %>
+  <% if @transaction_template.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction_template.errors.count, "error") %> prohibited this transaction_template from being saved:</h2>
+
+      <ul>
+      <% @transaction_template.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="small-12 medium-6 columns">
+      <%= f.text_field :info, label: 'Informações', autofocus: true %>
+    </div>
+    <div class="small-12 medium-6 columns">
+      <%= f.number_field :amount, label: 'Valor', step: "any" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns">
+      <%= f.text_area :description, label: 'Descrição/Anotações', size: '100%x10' %>
+    </div>
+  </div>
+
+  <%= f.submit (@transaction_template.id ? 'Atualizar' : 'Criar') %>
+
+<% end %>

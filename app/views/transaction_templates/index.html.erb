@@ -1,0 +1,33 @@
+<h1>
+  <span class="fi-page-edit"></span>
+  Template
+  <%= link_to new_transaction_template_path, class: 'round tiny button' do %>
+    <span class="fi-plus"></span>&nbsp;
+    criar
+  <% end %>
+</h1>
+
+<table class="tablesaw tablesaw-stack" data-mode="stack">
+  <thead>
+    <tr>
+      <th scope="column">Descrição </th>
+      <th scope="column">Valor</th>
+      <th scope="column" width="130">Ação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transaction_templates.each do |transaction_template| %>
+      <tr>
+        <td><%= transaction_template.info %></td>
+        <td>R$ <%= '%.2f' % (transaction_template.amount || 0) %></td>
+        <td>
+          <ul class="button-group radius">
+            <li><button class="btn warning tiny"><i class="fi-check"></i></button></li>
+            <%= render partial: 'shared/action_buttons', locals: { controller: "transaction_templates", object: transaction_template } %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

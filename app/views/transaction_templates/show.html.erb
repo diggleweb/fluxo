@@ -1,0 +1,25 @@
+<h1>
+	<span class="fi-page-edit"></span>
+	Template
+	# <%= @transaction_template.id %>
+</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @transaction_template.info %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @transaction_template.amount %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @transaction_template.description %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_template_path(@transaction_template) %> |
+<%= link_to 'Back', transaction_templates_path %>
